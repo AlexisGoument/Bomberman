@@ -1,10 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwykwcrg1fory"]
+[gd_scene load_steps=8 format=3 uid="uid://dwykwcrg1fory"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_jupm5"]
+[ext_resource type="Texture2D" uid="uid://daw3r0vbqkpjf" path="res://assets/CHARACTERS/player/hero1.png" id="2_bkcpa"]
 [ext_resource type="Texture2D" uid="uid://coshv1qr88woq" path="res://assets/ENVIRONMENT/tilesets/tileset-world.png" id="2_fwidg"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7xh0"]
-size = Vector2(16.25, 16.25)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6slks"]
+radius = 6.0
+height = 15.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nodu2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bkcpa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p57ws"]
 texture = ExtResource("2_fwidg")
@@ -339,17 +352,16 @@ sources/15 = SubResource("TileSetAtlasSource_p57ws")
 scale = Vector2(4, 4)
 
 [node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(24.75, 25.25)
 script = ExtResource("1_jupm5")
 
-[node name="ColorRect" type="ColorRect" parent="Player"]
-offset_left = 17.0
-offset_top = 16.0
-offset_right = 33.0
-offset_bottom = 32.0
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(25.125, 23.875)
-shape = SubResource("RectangleShape2D_d7xh0")
+position = Vector2(-0.5, -0.75)
+shape = SubResource("CapsuleShape2D_6slks")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(-0.5, -1.25)
+sprite_frames = SubResource("SpriteFrames_nodu2")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_6l8ll")
