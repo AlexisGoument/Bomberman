@@ -386,4 +386,4 @@ offset_bottom = 177.0
 color = Color(0.384314, 0.470588, 0.533333, 1)
 
 [node name="Bomb" parent="." instance=ExtResource("4_y7b84")]
-position = Vector2(111.346, 47.4934)
+position = Vector2(96.3061, 48.285)
