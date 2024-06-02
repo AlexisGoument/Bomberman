@@ -32,4 +32,4 @@ func explode_body(rid: RID):
 		tilemap.erase_cell(0, coords)
 	elif atlas_coords == WALL_BONUS_ATLAS_COORDS:
 		tilemap.erase_cell(0, coords)
-		print(get_parent().create_powerup(coords))
+		get_parent().create_powerup(coords)
