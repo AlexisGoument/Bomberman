@@ -4,11 +4,16 @@ extends StaticBody2D
 @onready var ray_cast_left = $Bomb/RayCastLeft
 @onready var ray_cast_right = $Bomb/RayCastRight
 @onready var tilemap: TileMap = $"../TileMap"
+@onready var collision_shape_2d = $CollisionShape2D
 
 const TILESIZE = 16
 const WALL_ATLAS_COORDS = Vector2i(2, 6)
 const WALL_BONUS_ATLAS_COORDS = Vector2i(2, 5)
 var bombLength = 1
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
 
 func explode():
 	ray_cast_left.target_position.x = bombLength * TILESIZE * -1
@@ -33,3 +38,7 @@ func explode_body(rid: RID):
 	elif atlas_coords == WALL_BONUS_ATLAS_COORDS:
 		tilemap.erase_cell(0, coords)
 		get_parent().create_powerup(coords)
+
+func _on_area_2d_body_exited(body):
+	if body.name == "Player":
+		collision_shape_2d.set_deferred("disabled", false)
