@@ -1,11 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2qgp7bshk4s3"]
+[gd_scene load_steps=7 format=3 uid="uid://d2qgp7bshk4s3"]
 
 [ext_resource type="Texture2D" uid="uid://dy686rc8as3f0" path="res://assets/OBJECTS/items/bomb.png" id="1_gf4j8"]
 [ext_resource type="Script" path="res://scripts/bomb.gd" id="1_gx26v"]
-[ext_resource type="AudioStream" uid="uid://j83h1yalid14" path="res://sounds/fx/shooter.wav" id="2_mf4dw"]
-[ext_resource type="Texture2D" uid="uid://dt4a0byhkxrnw" path="res://assets/FX/fire/fire1.png" id="3_5d303"]
-[ext_resource type="Texture2D" uid="uid://bikdgk33l3sqg" path="res://assets/FX/fire/fire2.png" id="4_xtdlt"]
-[ext_resource type="Texture2D" uid="uid://ps8hy6x6trtw" path="res://assets/FX/fire/fire3.png" id="5_nhhef"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t0otf"]
 radius = 5.0
@@ -27,38 +23,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/path = NodePath("Bomb:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Bomb:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
 "values": [true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_r8isd"]
@@ -79,46 +51,22 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/path = NodePath("Bomb:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(3),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Bomb:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(3, 5),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -136,41 +84,12 @@ _data = {
 "bombTicking": SubResource("Animation_r8isd")
 }
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_fuxe3"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_5d303")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_xtdlt")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_nhhef")
-}],
-"loop": true,
-"name": &"default",
-"speed": 7.0
-}]
-
 [node name="Bomb" type="StaticBody2D"]
 script = ExtResource("1_gx26v")
 
 [node name="Bomb" type="Sprite2D" parent="."]
 position = Vector2(8, 8)
 texture = ExtResource("1_gf4j8")
-
-[node name="RayCastUp" type="RayCast2D" parent="Bomb"]
-target_position = Vector2(0, -16)
-
-[node name="RayCastDown" type="RayCast2D" parent="Bomb"]
-target_position = Vector2(0, 16)
-
-[node name="RayCastLeft" type="RayCast2D" parent="Bomb"]
-target_position = Vector2(-16, 0)
-
-[node name="RayCastRight" type="RayCast2D" parent="Bomb"]
-target_position = Vector2(16, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, 9)
@@ -182,17 +101,6 @@ libraries = {
 "": SubResource("AnimationLibrary_qrjat")
 }
 autoplay = "bombTicking"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_mf4dw")
-bus = &"FX"
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(8, 8)
-sprite_frames = SubResource("SpriteFrames_fuxe3")
-autoplay = "default"
-frame_progress = 0.243688
 
 [node name="Area2D" type="Area2D" parent="."]
 
