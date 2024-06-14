@@ -10,6 +10,5 @@ func _on_area_2d_body_exited(body):
 
 func explode():
 	var explosion = explosion_scene.instantiate()
-	print("explosion position: ", self.position)
 	explosion.position = self.position
-	add_child(explosion)
+	get_parent().add_child(explosion)
